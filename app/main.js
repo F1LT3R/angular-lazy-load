@@ -12,7 +12,5 @@ require.config({
       deps: ['angular'],
     },
   },
-  deps: [
-    'init'
-  ],
+  deps: ['bootstrap'],
 });
