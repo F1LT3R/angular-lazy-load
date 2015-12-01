@@ -12,9 +12,20 @@ define([
     'test.directive',
   ]);
 
+  app.config(function ($stateProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $urlRouterProvider) {
+    app.controllerProvider = $controllerProvider;
+    app.compileProvider    = $compileProvider;
+    app.stateProvider      = $stateProvider;
+    app.filterProvider     = $filterProvider;
+    app.provide            = $provide;
 
-  app.config(['$compileProvider', '$stateProvider', '$urlRouterProvider',
-  function ($compileProvider, $stateProvider, $urlRouterProvider) {
+    // app.lazy = {
+    //   controller: $controllerProvider.register,
+    //   directive: $compileProvider.directive,
+    //   filter: $filterProvider.register,
+    //   factory: $provide.factory,
+    //   service: $provide.service
+    // };
 
     $urlRouterProvider.otherwise('/');
 
@@ -28,13 +39,60 @@ define([
         views: {
           'page@': {
             templateUrl: 'view-a.tmpl.html',
-          },
+            controller: 'ViewACtrl',
+            resolve: {
+              deps: function ($q, $rootScope) {
+                var deferred = $q.defer();
+
+                var dependencies = [
+                  'view-a.ctrl',
+                  // 'directives/some-directive.js'
+                ];
+
+
+                // Load the dependencies
+                require(dependencies, function() {
+                  // all dependencies have now been loaded by so resolve the promise
+                  $rootScope.$apply(function() {
+                    deferred.resolve();
+                  });
+                });
+
+                return deferred.promise;
+              }
+            }
+          }
         }
       })
-    ;
+      ;
 
-    app.compileProvider = $compileProvider;
-  }]);
+  });
+
+
+
+  // app.config(['$compileProvider', '$stateProvider', '$urlRouterProvider',
+
+  // app.config(function ($compileProvider, $stateProvider, $urlRouterProvider) {
+
+  //   $urlRouterProvider.otherwise('/');
+
+  //   $stateProvider
+
+  //     .state('app', {
+  //       url:'/',
+  //     })
+
+  //     .state('app.view-a', {
+  //       views: {
+  //         'page@': {
+  //           templateUrl: 'view-a.tmpl.html',
+  //         },
+  //       }
+  //     })
+  //   ;
+
+  //   app.compileProvider = $compileProvider;
+  // });
 
 
 
