@@ -1,6 +1,6 @@
 define([
   'angular',
-  'directive',
+  'core-directive',
   'app-main-ctrl',
   'ui-router'
 ], function (angular, directive, appMainCtrl, uiRouter) {
