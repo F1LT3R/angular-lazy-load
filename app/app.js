@@ -13,19 +13,16 @@ define([
   ]);
 
   app.config(function ($stateProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $urlRouterProvider) {
-    app.controllerProvider = $controllerProvider;
     app.compileProvider    = $compileProvider;
-    app.stateProvider      = $stateProvider;
-    app.filterProvider     = $filterProvider;
-    app.provide            = $provide;
 
-    // app.lazy = {
-    //   controller: $controllerProvider.register,
-    //   directive: $compileProvider.directive,
-    //   filter: $filterProvider.register,
-    //   factory: $provide.factory,
-    //   service: $provide.service
-    // };
+    app.lazy = {
+      compile: $compileProvider,
+      controller: $controllerProvider.register,
+      directive: $compileProvider.directive,
+      filter: $filterProvider.register,
+      factory: $provide.factory,
+      service: $provide.service
+    };
 
     $urlRouterProvider.otherwise('/');
 
@@ -46,13 +43,10 @@ define([
 
                 var dependencies = [
                   'view-a.ctrl',
-                  // 'directives/some-directive.js'
+                  'lazy-directive-2.js',
                 ];
 
-
-                // Load the dependencies
                 require(dependencies, function() {
-                  // all dependencies have now been loaded by so resolve the promise
                   $rootScope.$apply(function() {
                     deferred.resolve();
                   });

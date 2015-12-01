@@ -1,6 +1,8 @@
 define(['app'], function (app) {
 
-  return app.controllerProvider.register('ViewACtrl', function($scope){
+  console.log(app.lazy.controller);
+
+  return app.lazy.controller('ViewACtrl', function($scope){
      $scope.somethingcool = 'Cool!';
   });
 
