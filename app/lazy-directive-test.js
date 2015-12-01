@@ -4,7 +4,7 @@ require(['app'], function (app) {
       restrict: 'E',
       template: '<div>Lazy Directive Test</div>',
       link: function(scope, element, attrs) {
-        console.log(scope);
+        console.log('lazydirectivetest');
       }
     };
   });

@@ -5,10 +5,9 @@ define([
   'ui-router'
 ], function (angular, directive, appMainCtrl, uiRouter) {
 
-  console.log(uiRouter, 'uirouter');
 
   var app = angular.module('AppName', [
-    // Angluar Module Deps
+    // Core Module Dependancies Required
     'ui.router',
     'test.directive',
   ]);
@@ -21,12 +20,11 @@ define([
 
     $stateProvider
 
-      .state('root', {
+      .state('app', {
         url:'/',
       })
 
-      .state('view-a', {
-        url:'/view-a',
+      .state('app.view-a', {
         views: {
           'page@': {
             templateUrl: 'view-a.tmpl.html',
@@ -37,11 +35,6 @@ define([
 
     app.compileProvider = $compileProvider;
   }]);
-
-
-  // app.config(['$compileProvider', function ($compileProvider) {
-  //   app.compileProvider = $compileProvider;
-  // }]);
 
 
 
@@ -82,6 +75,7 @@ define([
 
   }]);
 
+
   app.service('DirectivesFileMapper', function() {
 
     var _mapper = {
@@ -98,65 +92,65 @@ define([
 
   });
 
-  app.service('LazyDirectiveLoader', ['$rootScope', '$q', '$compile', 'DirectivesFileMapper', function($rootScope, $q, $compile, DirectivesFileMapper) {
+  // app.service('LazyDirectiveLoader', ['$rootScope', '$q', '$compile', 'DirectivesFileMapper', function($rootScope, $q, $compile, DirectivesFileMapper) {
 
-    var _directivesLoaded = [],
-     _modulesLoaded = [];
+  //   var _directivesLoaded = [],
+  //    _modulesLoaded = [];
 
-    var _load = function(directiveName) {
-        // make sure the directive exists in the mapper
-        var directiveFile = DirectivesFileMapper.get(directiveName);
-        if (!directiveFile) {
-            console.log('Error: Cant find directive in mapper : ' + directiveName);
-            return;
-        }
+  //   var _load = function(directiveName) {
+  //       // make sure the directive exists in the mapper
+  //       var directiveFile = DirectivesFileMapper.get(directiveName);
+  //       if (!directiveFile) {
+  //           console.log('Error: Cant find directive in mapper : ' + directiveName);
+  //           return;
+  //       }
 
-        var deferred = $q.defer();
+  //       var deferred = $q.defer();
 
-        // check if we loaded this directive already
-        if (_directivesLoaded.indexOf(directiveName) >= 0) {
-            deferred.resolve();
-            return deferred.promise;
-        }
+  //       // check if we loaded this directive already
+  //       if (_directivesLoaded.indexOf(directiveName) >= 0) {
+  //           deferred.resolve();
+  //           return deferred.promise;
+  //       }
 
-        // Load the directive javascript file we need
-        // TODO: export this part to a separate service
-        var script = document.createElement('script');
-        script.src = directiveFile;
-        script.onload = function() {
-            _modulesLoaded.push(directiveName);
-            $rootScope.$apply(deferred.resolve);
-        };
-        document.getElementsByTagName('head')[0].appendChild(script);
+  //       // Load the directive javascript file we need
+  //       // TODO: export this part to a separate service
+  //       var script = document.createElement('script');
+  //       script.src = directiveFile;
+  //       script.onload = function() {
+  //           _modulesLoaded.push(directiveName);
+  //           $rootScope.$apply(deferred.resolve);
+  //       };
+  //       document.getElementsByTagName('head')[0].appendChild(script);
 
-        return deferred.promise;
-    };
+  //       return deferred.promise;
+  //   };
 
-    // You can use this method to dynamically compile the loaded directive
-    var _loadDirective = function(directiveName, attrsMap) {
-        var elementName = _snakeCase(directiveName);
-        var element = '<' + elementName + '></' + elementName + '>';
-        // TODO: convert `attrsMap` to attributes on the directive element tag
-        return $compile(element)($rootScope);
-    };
+  //   // You can use this method to dynamically compile the loaded directive
+  //   var _loadDirective = function(directiveName, attrsMap) {
+  //       var elementName = _snakeCase(directiveName);
+  //       var element = '<' + elementName + '></' + elementName + '>';
+  //       // TODO: convert `attrsMap` to attributes on the directive element tag
+  //       return $compile(element)($rootScope);
+  //   };
 
-    // a helper method to translate a camel case name to snake case
-    // I took this directly from the angular js libraries so i know
-    // it's done the same way exactly!
-    var _snakeCase = function(string) {
-        var SNAKE_CASE_REGEXP = /[A-Z]/g;
-        separator = separator || '-';
-        return name.replace(SNAKE_CASE_REGEXP, function(letter, pos) {
-            return (pos ? separator : '') + letter.toLowerCase();
-        });
-    };
+  //   // a helper method to translate a camel case name to snake case
+  //   // I took this directly from the angular js libraries so i know
+  //   // it's done the same way exactly!
+  //   var _snakeCase = function(string) {
+  //       var SNAKE_CASE_REGEXP = /[A-Z]/g;
+  //       separator = separator || '-';
+  //       return name.replace(SNAKE_CASE_REGEXP, function(letter, pos) {
+  //           return (pos ? separator : '') + letter.toLowerCase();
+  //       });
+  //   };
 
-    return {
-        load: _load,
-        loadDirective: _loadDirective
-    };
+  //   return {
+  //       load: _load,
+  //       loadDirective: _loadDirective
+  //   };
 
-  }]);
+  // }]);
 
 
 

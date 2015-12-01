@@ -4,10 +4,12 @@ define(['app', 'config'], function (app) {
   function ($scope, config, LazyDirectiveLoader, $state) {
     $scope.title = config.title;
 
+    console.log(123);
+
     LazyDirectiveLoader.load('LazyDirectiveTest').then(function () {
-      console.log('ok');
-      console.log(arguments);
-      $state.go('view-a');
+      console.log(456);
+
+      $state.go('app.view-a', null, { reload: true });
     });
 
   }]);
