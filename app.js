@@ -2,8 +2,9 @@ define([
   'angular',
   'core-directive',
   'app-main-ctrl',
-  'ui-router'
-], function (angular, directive, appMainCtrl, uiRouter) {
+  'ui-router',
+  'routes'
+], function (angular, directive, appMainCtrl, uiRouter, routes) {
 
 
   var app = angular.module('AppName', [
@@ -44,6 +45,7 @@ define([
                 var dependencies = [
                   'view-a.ctrl',
                   'lazy-directive-2.js',
+                  'service-abc.js',
                 ];
 
                 require(dependencies, function() {
