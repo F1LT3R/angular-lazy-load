@@ -1,65 +1,54 @@
 define({
 
-  // 'app': {
-  //   url: '/'
-  // },
+  // Used to create bundles of common dependancies, Eg: survey components
+  bundles: {
+    surveys: [
+      //
+    ]
+  },
 
-  // 'app.view-a': {
-  //   url: 'view-a',
-  //   views: {
-  //     'page@': {
-  //       templateUrl: 'view-a.tmpl.html',
-  //       controller: 'ViewACtrl',
+  states: {
 
-  //       resolve: {
-  //         deps: function ($q, $rootScope) {
-  //           var deferred = $q.defer();
+    'app':
+    {
+      url: '/'
+    },
 
-  //           var dependencies = [
-  //             'view-a.ctrl',
-  //             'lazy-directive-2.js',
-  //           ];
 
-  //           require(dependencies, function() {
-  //             $rootScope.$apply(function() {
-  //               deferred.resolve();
-  //             });
-  //           });
+    'app.view-a':
+    {
+      url: 'view-a',
+      views: {
+        'page@': {
+          templateUrl: 'view-a.tmpl.html',
+          controller: 'ViewACtrl',
+          deps: [
+            'view-a.ctrl',
+            'lazy-directive-2.js',
+          ],
+        }
+      }
+    },
 
-  //           return deferred.promise;
-  //         }
-  //       }
-  //     }
-  //   }
-  // })
 
-  // .state('app.view-b', {
-  //   url: 'view-b',
-  //   views: {
-  //     'page@': {
-  //       templateUrl: 'view-b.tmpl.html',
-  //       controller: 'ViewBCtrl',
-  //       resolve: {
-  //         deps: function ($q, $rootScope) {
-  //           var deferred = $q.defer();
+    'app.view-b':
+    {
+      url: 'view-b',
+      views: {
+        'page@': {
+          templateUrl: 'view-b.tmpl.html',
+          controller: 'ViewBCtrl',
+          deps: [
+            'view-b.ctrl',
+            'lazy-directive-3.js',
+            'service-abc.js',
+          ],
+        }
+      }
+    },
 
-  //           var dependencies = [
-  //             'view-b.ctrl',
-  //             'lazy-directive-3.js',
-  //           ];
 
-  //           require(dependencies, function() {
-  //             $rootScope.$apply(function() {
-  //               deferred.resolve();
-  //             });
-  //           });
-
-  //           return deferred.promise;
-  //         }
-  //       }
-  //     }
-  //   }
-  // })
+  }
 
 
 
