@@ -1,4 +1,5 @@
-define(['angular'], function (angular) {
+define(['angular', 'routes'], function (angular, routes) {
+
 
     var routeResolver = function () {
 
@@ -6,63 +7,43 @@ define(['angular'], function (angular) {
             return this;
         };
 
-        this.routeConfig = function () {
+
+        this.route = function () {
+
+          var resolve = function (routeDef) {
+
+            angular.forEach(routeDef.views, function (view) {
 
 
-            var viewsDirectory = '/app/views/',
-                controllersDirectory = '/app/controllers/',
+              view.deps.map(function (dep) {
+                return routes.config.staticDirectory + dep;
+              });
 
-            setBaseDirectories = function (viewsDir, controllersDir) {
-                viewsDirectory = viewsDir;
-                controllersDirectory = controllersDir;
-            },
+              view.resolve = { load: ['$q', '$rootScope', function ($q, $rootScope) {
+                return resolveDependencies($q, $rootScope, view.deps);
+              }]};
+            });
 
-            getViewsDirectory = function () {
-                return viewsDirectory;
-            },
+            return routeDef;
+          },
 
-            getControllersDirectory = function () {
-                return controllersDirectory;
-            };
+          resolveDependencies = function ($q, $rootScope, dependencies) {
+            var defer = $q.defer();
 
-            return {
-                setBaseDirectories: setBaseDirectories,
-                getControllersDirectory: getControllersDirectory,
-                getViewsDirectory: getViewsDirectory
-            };
+            require(dependencies, function () {
+              defer.resolve();
+              $rootScope.$apply();
+            });
+
+            return defer.promise;
+          };
+
+
+          return {
+            resolve: resolve
+          };
+
         }();
-
-
-
-        this.route = function (routeConfig) {
-
-            var resolve = function (routeDef) {
-
-                angular.forEach(routeDef.views, function (view) {
-                  view.resolve = { load: ['$q', '$rootScope', function ($q, $rootScope) {
-                    return resolveDependencies($q, $rootScope, view.deps);
-                  }]};
-                });
-
-                return routeDef;
-
-            },
-
-            resolveDependencies = function ($q, $rootScope, dependencies) {
-                var defer = $q.defer();
-                require(dependencies, function () {
-                    defer.resolve();
-                    $rootScope.$apply();
-                });
-
-                return defer.promise;
-            };
-
-            return {
-                resolve: resolve
-            };
-
-        }(this.routeConfig);
 
     };
 

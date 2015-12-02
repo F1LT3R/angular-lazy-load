@@ -1,5 +1,9 @@
 define({
 
+  config: {
+    staticDirectory: './',
+  },
+
   // Used to create bundles of common dependancies, Eg: survey components
   bundles: {
     surveys: [
@@ -49,7 +53,5 @@ define({
 
 
   }
-
-
 
 });
