@@ -3,6 +3,11 @@ require.config({
   paths: {
     'angular': '//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min',
     'ui-router': '//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min',
+    'core'      : 'app/core',
+    'app'       : 'app/core/app',
+    'views'     : 'app/views',
+    'directives': 'app/directives',
+    'services'  : 'app/services',
   },
   shim: {
     'angular': {
@@ -12,5 +17,5 @@ require.config({
       deps: ['angular'],
     },
   },
-  deps: ['bootstrap'],
+  deps: ['core/bootstrap'],
 });

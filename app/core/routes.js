@@ -1,7 +1,7 @@
 define({
 
   config: {
-    staticDirectory: './',
+    staticDirectory: './app/',
   },
 
   // Used to create bundles of common dependancies, Eg: survey components
@@ -24,11 +24,12 @@ define({
       url: 'view-a',
       views: {
         'page@': {
-          templateUrl: 'view-a.tmpl.html',
+          templateUrl: 'views/view-a.tmpl.html',
           controller: 'ViewACtrl',
           deps: [
-            'view-a.ctrl',
-            'lazy-directive-2.js',
+            'views/view-a.ctrl',
+            'directives/lazy-directive-2',
+            'services/service-abc',
           ],
         }
       }
@@ -40,12 +41,12 @@ define({
       url: 'view-b',
       views: {
         'page@': {
-          templateUrl: 'view-b.tmpl.html',
+          templateUrl: 'views/view-b.tmpl.html',
           controller: 'ViewBCtrl',
           deps: [
-            'view-b.ctrl',
-            'lazy-directive-3.js',
-            'service-abc.js',
+            'views/view-b.ctrl',
+            'directives/lazy-directive-3',
+            'services/service-abc',
           ],
         }
       }

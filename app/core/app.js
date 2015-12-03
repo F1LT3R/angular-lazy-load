@@ -1,13 +1,12 @@
 define([
   'angular',
-  'core-directive',
-  'app-main-ctrl',
+  'core/core-directive',
+  'core/main-ctrl',
   'ui-router',
-  'routes',
-  'rr'
-], function (angular, directive, appMainCtrl, uiRouter, routes, rr) {
+  'core/routes',
+  'core/route-resolver'
+], function (angular, directive, appMainCtrl, uiRouter, routes, routeResolver) {
 
-  console.log(rr);
 
   var app = angular.module('AppName', [
     // Core Module Dependancies Required
@@ -15,8 +14,6 @@ define([
     'core.directive',
     'routeResolverServices',
   ]);
-
-
 
 
   app.config(function ($stateProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $urlRouterProvider, routeResolverProvider) {
@@ -38,7 +35,6 @@ define([
 
     $urlRouterProvider.otherwise('/');
   });
-
 
 
   app.controller('AppMainCtrl', appMainCtrl);

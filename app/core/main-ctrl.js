@@ -1,4 +1,4 @@
-define(['app', 'app-config'], function (app) {
+define(['app', 'core/config'], function (app) {
 
   app.controller('AppMainCtrl', ['$scope', 'appconfig',
   function ($scope, appconfig) {
