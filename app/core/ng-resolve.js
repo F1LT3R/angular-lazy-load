@@ -1,4 +1,6 @@
-define(['angular', 'core/ng-routes'], function (angular, routes) {
+define(['angular', 'core/ng-routes', 'core/load-css'], function (angular, routes, loadCss) {
+
+  console.log(loadCss);
 
   var routeResolver = function () {
 
@@ -23,9 +25,16 @@ define(['angular', 'core/ng-routes'], function (angular, routes) {
             return routes.config.staticDirectory + dep;
           });
 
-          view.resolve = { load: ['$q', '$rootScope', function ($q, $rootScope) {
-            return resolveDependencies($q, $rootScope, view.deps);
-          }]};
+          view.resolve = {
+            loadDeps: ['$q', '$rootScope', function ($q, $rootScope) {
+              return resolveDependencies($q, $rootScope, view.deps);
+            }],
+            loadStyle:[function() {
+              if (view.hasOwnProperty('style')) {
+                loadCss.load(routes.config.staticDirectory + view.style);
+              }
+            }]
+          };
         });
 
         return routeDef;

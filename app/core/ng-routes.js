@@ -26,6 +26,7 @@ define({
         'page@': {
           templateUrl: 'views/view-a.tmpl',
           controller: 'ViewACtrl',
+          style: 'views/view-a.css',
           deps: [
             'views/view-a.ctrl',
             'directives/lazy-directive-2',
