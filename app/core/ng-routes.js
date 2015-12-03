@@ -24,7 +24,7 @@ define({
       url: 'view-a',
       views: {
         'page@': {
-          templateUrl: 'views/view-a.tmpl.html',
+          templateUrl: 'views/view-a.tmpl',
           controller: 'ViewACtrl',
           deps: [
             'views/view-a.ctrl',
@@ -41,7 +41,7 @@ define({
       url: 'view-b',
       views: {
         'page@': {
-          templateUrl: 'views/view-b.tmpl.html',
+          templateUrl: 'views/view-b.tmpl',
           controller: 'ViewBCtrl',
           deps: [
             'views/view-b.ctrl',

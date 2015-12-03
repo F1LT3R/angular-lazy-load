@@ -1,11 +1,12 @@
 define([
   'angular',
+  'core/ng-app.ctrl',
+  'core/ng-routes',
+
+  'core/ng-resolve',
   'core/core-directive',
-  'core/main-ctrl',
   'ui-router',
-  'core/routes',
-  'core/route-resolver'
-], function (angular, directive, appMainCtrl, uiRouter, routes, routeResolver) {
+], function (angular, NgAppCtrl, routes) {
 
 
   var app = angular.module('AppName', [
@@ -37,7 +38,7 @@ define([
   });
 
 
-  app.controller('AppMainCtrl', appMainCtrl);
+  app.controller('AppMainCtrl', NgAppCtrl);
 
   return app;
 

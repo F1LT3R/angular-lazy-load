@@ -1,4 +1,4 @@
 // The main file that kicks everything off
-require(['core/main-ctrl', 'angular'], function (mainctrl, angular) {
+require(['core/ng-app.ctrl', 'angular'], function (NgAppCtrl, angular) {
   return angular.bootstrap(document, ['AppName']);
 });

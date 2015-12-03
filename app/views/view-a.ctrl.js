@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['core/ng-app'], function (app) {
 
   return app.lazy.controller('ViewACtrl', ['$scope', 'serviceABC', function($scope, serviceABC){
      $scope.somethingcool = 'Cool!';

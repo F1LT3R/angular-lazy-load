@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['core/ng-app'], function (app) {
 
   return app.lazy.directive('lazydirective2', function () {
     return {

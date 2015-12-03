@@ -1,4 +1,4 @@
-define(['angular', 'core/routes'], function (angular, routes) {
+define(['angular', 'core/ng-routes'], function (angular, routes) {
 
   var routeResolver = function () {
 
@@ -14,7 +14,7 @@ define(['angular', 'core/routes'], function (angular, routes) {
         angular.forEach(routeDef.views, function (view) {
 
           if (view.hasOwnProperty('templateUrl')) {
-            view.templateUrl = routes.config.staticDirectory + view.templateUrl;
+            view.templateUrl = routes.config.staticDirectory + view.templateUrl + '.html';
           }
 
 
