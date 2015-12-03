@@ -38,17 +38,15 @@ define(['angular', 'core/ng-routes', 'core/load-css'], function (angular, routes
             }
           });
 
-          view.deps = depJs;
 
 
           view.resolve = {
 
             loadDeps: ['$q', '$rootScope', function ($q, $rootScope) {
-              return resolveDependencies($q, $rootScope, view.deps);
+              return resolveDependencies($q, $rootScope, depJs);
             }],
 
             loadStyle:[function() {
-              console.log(depCss);
               depCss.forEach(function (cssFile) {
                 loadCss.load(cssFile);
               });
