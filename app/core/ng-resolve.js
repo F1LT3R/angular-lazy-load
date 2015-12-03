@@ -14,39 +14,45 @@ define(['angular', 'core/ng-routes', 'core/load-css'], function (angular, routes
         angular.forEach(routeDef.views, function (view, name) {
 
           if (view.hasOwnProperty('templateUrl')) {
-            view.templateUrl = routes.config.staticDirectory + view.templateUrl + '.html';
+            view.templateUrl = routes.config.staticDirectory + view.templateUrl;
           }
 
 
+          var depCss = [],
+            depJs = [];
+
+
           // Rewrite urls
-          view.deps.map(function (dep) {
-            return routes.config.staticDirectory + dep;
+          view.deps.forEach(function (dep) {
+            dep = routes.config.staticDirectory + dep;
+
+            var ext = dep.slice(dep.lastIndexOf('.')),
+              file = dep.slice(0, dep.lastIndexOf('.'));
+
+            if (ext === '.js') {
+              depJs.push(file);
+            }
+
+            if (ext === '.css') {
+              depCss.push(dep);
+            }
           });
 
+          view.deps = depJs;
+
+
           view.resolve = {
-
-            state: ['$rootScope', '$state', function ($rootScope, $state) {
-              // console.log(123, $state, $rootScope);
-              // $rootScope.$apply(function () {
-                // $rootScope.state = $state.current.name;
-              // });
-              // console.log(123, $rootScope);
-              // console.log(456, $scope);
-
-              // $rootScope.state = $state.current.name;
-              // $scope.$digest();
-            }],
 
             loadDeps: ['$q', '$rootScope', function ($q, $rootScope) {
               return resolveDependencies($q, $rootScope, view.deps);
             }],
 
             loadStyle:[function() {
-              if (view.hasOwnProperty('style')) {
-                loadCss.load(routes.config.staticDirectory + view.style);
-              }
+              console.log(depCss);
+              depCss.forEach(function (cssFile) {
+                loadCss.load(cssFile);
+              });
             }]
-
           };
         });
 
