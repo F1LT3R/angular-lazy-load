@@ -44,6 +44,7 @@ define({
         'page@': {
           templateUrl: 'views/view-b.tmpl',
           controller: 'ViewBCtrl',
+          style: 'views/view-b.css',
           deps: [
             'views/view-b.ctrl',
             'directives/lazy-directive-3',
