@@ -1,3 +1,5 @@
+require.dev = true;
+
 require.config({
   waitSeconds: 7,
   paths: {
@@ -16,5 +18,7 @@ require.config({
       deps: ['angular'],
     },
   },
-  deps: ['core/ng-bootstrap'],
+  deps: [
+    'core/ng-bootstrap',
+  ],
 });

@@ -13,16 +13,10 @@ define(['angular', 'core/ng-routes', 'core/load-css'], function (angular, routes
 
         angular.forEach(routeDef.views, function (view, name) {
 
-          if (view.hasOwnProperty('templateUrl')) {
-            view.templateUrl = routes.config.staticDirectory + view.templateUrl;
-          }
-
-
           var depCss = [],
             depJs = [];
 
-
-          // Rewrite urls
+          
           view.deps.forEach(function (dep) {
             dep = routes.config.staticDirectory + dep;
 
@@ -31,13 +25,18 @@ define(['angular', 'core/ng-routes', 'core/load-css'], function (angular, routes
 
             if (ext === '.js') {
               depJs.push(file);
+              return;
             }
 
             if (ext === '.css') {
               depCss.push(dep);
+              return;
+            }
+
+            if (ext === '.html') {
+              view.templateUrl = dep;
             }
           });
-
 
 
           view.resolve = {
@@ -51,11 +50,13 @@ define(['angular', 'core/ng-routes', 'core/load-css'], function (angular, routes
                 loadCss.load(cssFile);
               });
             }]
+
           };
         });
 
         return routeDef;
       },
+
 
       resolveDependencies = function ($q, $rootScope, dependencies) {
         var defer = $q.defer();
@@ -77,11 +78,11 @@ define(['angular', 'core/ng-routes', 'core/load-css'], function (angular, routes
 
   };
 
-    var servicesApp = angular.module('routeResolverServices', []);
 
-    // Must be a provider since it will be injected into module.config()
-    servicesApp.provider('routeResolver', routeResolver);
+  var servicesApp = angular.module('routeResolverServices', []);
 
+  // Must be a provider since it will be injected into module.config()
+  servicesApp.provider('routeResolver', routeResolver);
 
-    return servicesApp;
+  return servicesApp;
 });

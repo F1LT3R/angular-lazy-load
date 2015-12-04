@@ -5,11 +5,11 @@ define(function () {
 
     viewA: [
       'views/view-a.ctrl.js',
+      'views/view-a.tmpl.html',
       'directives/lazy-directive-2.js',
       'services/service-abc.js',
       'views/view-a.css',
     ],
-
 
   };
 
@@ -33,14 +33,9 @@ define(function () {
         url: 'view-a',
         views: {
           'page@': {
-            templateUrl: 'views/view-a.tmpl.html',
+            // templateUrl: 'views/view-a.tmpl.html',
             controller: 'ViewACtrl',
             deps: bundles.viewA,
-            // deps: [
-            //   'views/view-a.ctrl',
-            //   'directives/lazy-directive-2',
-            //   'services/service-abc',
-            // ],
           }
         }
       },
@@ -51,13 +46,13 @@ define(function () {
         url: 'view-b',
         views: {
           'page@': {
-            templateUrl: 'views/view-b.tmpl.html',
             controller: 'ViewBCtrl',
             deps: [
               'views/view-b.ctrl.js',
+              'views/view-b.tmpl.html',
+              'views/view-b.css',
               'directives/lazy-directive-3.js',
               'services/service-abc.js',
-              'views/view-b.css',
             ],
           }
         }

@@ -2,7 +2,6 @@ define([
   'angular',
   'core/ng-app.ctrl',
   'core/ng-routes',
-
   'core/ng-resolve',
   'core/core-directive',
   'ui-router',
@@ -10,7 +9,7 @@ define([
 
 
   var app = angular.module('AppName', [
-    // Core Module Dependancies Required
+    // Core Modules needed to start app or used in all views
     'ui.router',
     'core.directive',
     'routeResolverServices',
@@ -30,6 +29,7 @@ define([
       service: $provide.service
     };
 
+    
     angular.forEach(routes.states, function (state, name) {
       $stateProvider.state(name, routeResolverProvider.route.resolve(state));
     });

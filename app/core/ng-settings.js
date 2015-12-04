@@ -1,15 +1,16 @@
-define(['core/ng-app'], function (app) {
+define([
+  'core/ng-app',
+  'core/ng-settings-core',
+  require.dev ? 'core/ng-settings-dev' : '',
+], function (app, settings_core, settings_dev) {
 
-  app.factory('settings', function () {
 
-    return {
+  console.log(require.dev);
+  console.log(settings_dev);
 
-      title: 'Test App',
 
-    };
+  // console.log(settings_dev);
 
-  });
-
-  return app;
+  return app.constant('settings', angular.extend(settings_core, settings_dev));
 
 });
