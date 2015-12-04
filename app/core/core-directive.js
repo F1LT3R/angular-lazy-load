@@ -1,12 +1,18 @@
 define(['angular'], function (angular) {
-  return angular.module('core.directive', [])
+
+  // Add a core directive to the app
+  angular.module('core.directive', [])
   .directive('coredirective', function () {
+
     return {
-      template: '<h3>Core Directive (not lazy, but uses require to load)</h3>',
+      template: '<h3>Core Directive (loaded via RequireJS not lazyloadProvider)</h3>',
+
       scope: {},
+
       link: function (scope, elem, attrs) {
         // console.log(scope, elem, attrs);
       }
     };
   });
+
 });

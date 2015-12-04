@@ -2,43 +2,46 @@ define([
   'angular',
   'core/ng-app.ctrl',
   'core/ng-routes',
-  'core/ng-resolve',
+  'core/ng-lazyload',
   'core/core-directive',
   'ui-router',
 ], function (angular, NgAppCtrl, routes) {
 
 
-  var app = angular.module('AppName', [
-    // Core Modules needed to start app or used in all views
+  var app = angular.module(require.settings.appname, [
+    // Define core modules:
+    //   a) needed start app
+    //   b) used in every/most view(s)
     'ui.router',
     'core.directive',
-    'routeResolverServices',
+    'core.lazyload',
   ]);
 
 
-  app.config(function ($stateProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $urlRouterProvider, routeResolverProvider) {
+  app.config(function ($stateProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $urlRouterProvider, lazyloadProvider) {
 
-    var route = routeResolverProvider.route;
-
-    app.lazy = {
-      compile: $compileProvider,
-      controller: $controllerProvider.register,
-      directive: $compileProvider.directive,
-      filter: $filterProvider.register,
-      factory: $provide.factory,
-      service: $provide.service
+    // Expose Providers to App so RequireJS modules can access them via lazyload
+    app.lazyload = {
+      compile     : $compileProvider,
+      controller  : $controllerProvider.register,
+      directive   : $compileProvider.directive,
+      filter      : $filterProvider.register,
+      factory     : $provide.factory,
+      service     : $provide.service
     };
 
-    
+
+    // Decorate routes with lazyload route resolver
     angular.forEach(routes.states, function (state, name) {
-      $stateProvider.state(name, routeResolverProvider.route.resolve(state));
+      $stateProvider.state(name, lazyloadProvider.route.resolve(state));
     });
+
 
     $urlRouterProvider.otherwise('/');
   });
 
 
-  app.controller('AppMainCtrl', NgAppCtrl);
+  app.controller('AppCtrl', NgAppCtrl);
 
   return app;
 

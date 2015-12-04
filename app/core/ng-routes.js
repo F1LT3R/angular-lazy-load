@@ -1,6 +1,5 @@
 define(function () {
 
-  // Used to create bundles of common dependencies
   var bundles = {
 
     viewA: [
@@ -12,6 +11,7 @@ define(function () {
     ],
 
   };
+
 
   var routes = {
 

@@ -1,11 +1,14 @@
 define(['core/ng-app'], function (app) {
 
-  return app.lazy.directive('lazydirective3', function () {
+  app.lazyload.directive('lazydirective3', function () {
+
     return {
-      restrict: 'E',
       template: '<div>Lazy Directive 3</div>',
+
+      restrict: 'E',
+
       link: function(scope, element, attrs) {
-        console.log('lazydirective3');
+        // console.log(scope, element, attrs);
       }
     };
   });

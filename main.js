@@ -1,4 +1,8 @@
-require.dev = true;
+// Expose settings to RequireJS modules
+require.settings = {
+  dev: true,
+  appname: 'MyExampleApp'
+};
 
 require.config({
   waitSeconds: 7,

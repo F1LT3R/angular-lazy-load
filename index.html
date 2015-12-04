@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html state="{{ state }}" ng-controller="AppMainCtrl">
+<html state="{{ state }}" ng-controller="AppCtrl">
 
 <head>
 </head>
@@ -12,9 +12,16 @@
 
   <coredirective></coredirective>
 
+  <style>
+    .active{
+      border-left:4px solid #D40;
+      padding-left: 4px;
+    }
+  </style>
+
   <ul>
-    <li><a ui-sref="app.view-a">View A</a></li>
-    <li><a ui-sref="app.view-b">View B</a></li>
+    <li ui-sref-active="active"><a ui-sref="app.view-a">View A</a></li>
+    <li ui-sref-active="active"><a ui-sref="app.view-b">View B</a></li>
   </ul>
 
   <hr>

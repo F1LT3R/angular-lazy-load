@@ -1,6 +1,28 @@
-# Angular Lazy Load
+# Angular LazyLoad CookieCutter
 
-A demonstration of using Angular-JS with Require-JS to lazy-load modules. In this context, Lazy-Load means: to fetch individual JavaScript controllers and directives after the Angular app has already been bootstrapped, and resolving them as dependencies as the route is updated.
+An AngularJS + Ui-Router + RequireJS cookie cutter: for creating web-applications that fetches controllers, modules and CSS, after Angular has been bootstrapped, resolving their dependencies as the route changes.
 
- - Source on GitHub: [https://github.com/F1LT3R/angular-lazy-load](https://github.com/F1LT3R/angular-lazy-load)
- - Demo on Plunker: [http://plnkr.co/edit/XU7MIXGAnU3kd6CITWE7](http://plnkr.co/edit/XU7MIXGAnU3kd6CITWE7)
+Read more about the [lazy-loading software design pattern](https://en.wikipedia.org/wiki/Lazy_loading) on Wikipedia.
+
+
+## Definitions
+
+### Ng-Files
+
+All files prefixed with `ng-` contain core Angular code.
+
+### Core Module
+
+The Definition of a Core Module is two-fold:
+
+ 1. A Module that the Angular App depends upon to be bootstrapped. A Core Module can be a Directive, a Controller or even a Configuration file.
+ 2. A Module that is used in every/many view(s) of the application. Eg: an API module that handles communication between the server and the client.
+
+
+
+Research:
+
+ - [Lazy Loading in AngularJS](http://ify.io/lazy-loading-in-angularjs/) - Ifeanyi Isitor
+ - [angularAMD](http://marcoslin.github.io/angularAMD/) - Marcoslin
+ - [Dynamically Loading Controllers & Views With AngularJS & RequireJS](http://weblogs.asp.net/dwahlin/dynamically-loading-controllers-and-views-with-angularjs-and-requirejs) - Dan Wahlin
+ - [Dynamically Loading Directives in AngularJS the Easy Way](http://www.debuggerstepthrough.com/2014/11/dynamically-loading-directives-in.html]) - Gilly Barr

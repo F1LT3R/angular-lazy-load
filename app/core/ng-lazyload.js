@@ -1,6 +1,12 @@
-define(['angular', 'core/ng-routes', 'core/load-css'], function (angular, routes, loadCss) {
+define([
+  'angular',
+  'core/ng-routes',
+  'core/load-css'
+], function (angular, routes, loadCss) {
 
-  var routeResolver = function () {
+  // Pattern modified from Dan Wahlin's blog, see: README.md
+
+  var lazyloadRouteResolver = function () {
 
     this.$get = function () {
       return this;
@@ -11,12 +17,14 @@ define(['angular', 'core/ng-routes', 'core/load-css'], function (angular, routes
 
       var resolve = function (routeDef) {
 
+        // Create dependency lists for each view
         angular.forEach(routeDef.views, function (view, name) {
 
           var depCss = [],
             depJs = [];
 
-          
+
+          // Subdivide the deps based on file extsnsion
           view.deps.forEach(function (dep) {
             dep = routes.config.staticDirectory + dep;
 
@@ -33,6 +41,7 @@ define(['angular', 'core/ng-routes', 'core/load-css'], function (angular, routes
               return;
             }
 
+            // Only one template can be used per ui-view
             if (ext === '.html') {
               view.templateUrl = dep;
             }
@@ -79,10 +88,10 @@ define(['angular', 'core/ng-routes', 'core/load-css'], function (angular, routes
   };
 
 
-  var servicesApp = angular.module('routeResolverServices', []);
+  var servicesApp = angular.module('core.lazyload', []);
 
   // Must be a provider since it will be injected into module.config()
-  servicesApp.provider('routeResolver', routeResolver);
+  servicesApp.provider('lazyload', lazyloadRouteResolver);
 
   return servicesApp;
 });

@@ -1,3 +1,6 @@
+/*
+  State based CSS Definition
+  */
 [state='app.view-b'] body {
   background: #0af;
 }

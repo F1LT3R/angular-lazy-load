@@ -1,3 +1,6 @@
-[state="app.view-a"] body {
+/*
+  State based CSS Definition
+  */
+[state='app.view-a'] body {
   background: #AF0;
 }
